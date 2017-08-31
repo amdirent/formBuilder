@@ -158,7 +158,7 @@ class FormRender {
    * @param {Object} element - an html element to render the form into (optional)
    * @return {Object} FormRender
    */
-  render(element = null) {
+  async render(element = null) {
     const formRender = this;
     let opts = this.options;
     element = this.getElement(element);
@@ -189,7 +189,7 @@ class FormRender {
 
         // determine the control class for this type, and then process it through the layout engine
         let controlClass = control.getClass(fieldData.type, fieldData.subtype);
-        let field = engine.build(controlClass, sanitizedField);
+        let field = await engine.build(controlClass, sanitizedField);
         rendered.push(field);
       }
 
@@ -220,7 +220,7 @@ class FormRender {
    * @param {Object} element - an optional DOM element to render the field into - if not specified will just return the rendered field - note if you do this you will need to manually call element.dispatchEvent('fieldRendered') on the returned element when it is rendered into the DOM
    * @return {Object} the formRender object
    */
-  renderControl(element = null) {
+  async renderControl(element = null) {
     let opts = this.options;
     let fieldData = opts.formData;
     if (!fieldData || Array.isArray(fieldData)) {
@@ -232,7 +232,7 @@ class FormRender {
     let engine = new opts.layout();
     let controlClass = control.getClass(fieldData.type, fieldData.subtype);
     let forceTemplate = opts.forceTemplate || 'hidden'; // support the ability to override what layout template the control is rendered using. This can be used to output the whole row (including label, help etc) using the standard templates if desired.
-    let field = engine.build(controlClass, sanitizedField, forceTemplate);
+    let field = await engine.build(controlClass, sanitizedField, forceTemplate);
     element.appendFormFields(field);
     opts.notify.success(opts.messages.formRendered);
     return this;
@@ -258,6 +258,6 @@ class FormRender {
     let formRender = new FormRender(options);
     let elems = this;
     elems.each(i => formRender.renderControl(elems[i]));
-    return elems;
+    return Promise.all(elems);
   };
 })(jQuery);

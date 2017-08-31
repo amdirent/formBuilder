@@ -72,7 +72,7 @@ export default class layout {
    * @param {String} forceTemplate - programatically force the template with which this control to be rendered
    * @return {Object} element
    */
-  build(renderControl, data, forceTemplate) {
+  async build(renderControl, data, forceTemplate) {
     // prepare the data
     if (this.preview) {
       if (data.name) {
@@ -86,7 +86,7 @@ export default class layout {
 
     // build the control
     let control = new renderControl(data, this.preview);
-    let field = control.build();
+    let field = await control.build();
     if (typeof field !== 'object' || !field.field) {
       field = {field: field};
     }

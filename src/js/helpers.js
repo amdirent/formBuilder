@@ -336,7 +336,7 @@ export default class Helpers {
    * Collect field attribute values and call fieldPreview to generate preview
    * @param  {Object} $field jQuery DOM element
    */
-  updatePreview($field) {
+  async updatePreview($field) {
     let _this = this;
     let d = this.d;
     const fieldClass = $field.attr('class');
@@ -382,7 +382,7 @@ export default class Helpers {
     // determine the control class for this type, and then process it through the layout engine
     let custom = controlCustom.lookup(previewData.type);
     let controlClass = custom ? custom.class : control.getClass(previewData.type, previewData.subtype);
-    preview = this.layout.build(controlClass, previewData);
+    preview = await this.layout.build(controlClass, previewData);
 
     empty($prevHolder[0]);
     $prevHolder[0].appendChild(preview);

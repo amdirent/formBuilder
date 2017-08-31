@@ -2,6 +2,7 @@
 import utils from './utils';
 import mi18n from 'mi18n';
 
+let fbControlsLoaded = false;
 /**
  * Base class for all control classes
  * Defines the structure of a control class and some standard control methods
@@ -42,6 +43,7 @@ export default class control {
     }
     this.id = config.id;
     this.type = config.type;
+    this.subtype = config.subtype;
     if (this.description) {
       config.title = this.description;
     }
@@ -107,6 +109,7 @@ export default class control {
         control.error(`Ignoring type ${type}. Cannot use the character '.' in a type name.`);
         continue;
       }
+
       control.classRegister[prefix + type] = controlClass;
     }
   }
@@ -190,11 +193,11 @@ export default class control {
     // loop through each defined custom control.
     // expects a function that receives the master control class to inherit from (or optional classRegister to inherit from subclass)
     // see src/js/control_plugins/ for an example
-    if (!window.fbControlsLoaded) {
+    if (!fbControlsLoaded) {
       for (let loadControl of controlClasses) {
         loadControl(control, control.classRegister);
       }
-      window.fbControlsLoaded = true;
+      fbControlsLoaded = true;
     }
   }
 

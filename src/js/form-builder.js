@@ -473,6 +473,7 @@ const FormBuilder = function(opts, element) {
         'access',
       ],
       checkbox: [
+        'subtype',
         'required',
         'label',
         'description',
@@ -516,8 +517,9 @@ const FormBuilder = function(opts, element) {
         'step',
       ]),
       select: defaultAttrs.concat([
+        'subtype',
         'multiple',
-        'options',
+        'options'
       ]),
       textarea: defaultAttrs.concat([
         'subtype',
@@ -570,7 +572,7 @@ const FormBuilder = function(opts, element) {
       },
       label: () => textAttribute('label', values),
       description: () => textAttribute('description', values),
-      subtype: () => selectAttribute('subtype', values, subtypes[type]),
+      subtype: () => selectAttribute('subtype', values, subtypes[type].reverse()),
       style: () => btnStyles(values.style),
       placeholder: () => textAttribute('placeholder', values),
       rows: () => numberAttribute('rows', values),
