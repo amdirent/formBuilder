@@ -99,7 +99,7 @@ class FormRender {
         if (!Array.isArray(fields)) {
           fields = [fields];
         }
-        let renderedFormWrap = utils.markup('div', fields, {
+        let renderedFormWrap = utils.markup('form', fields, {
           className: 'rendered-form'
         });
         this.appendChild(renderedFormWrap);
@@ -244,6 +244,7 @@ class FormRender {
     let elems = this;
     let formRender = new FormRender(options);
     elems.each(i => formRender.render(elems[i]));
+    return formRender;
   };
 
   /**
