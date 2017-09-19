@@ -769,7 +769,7 @@ const FormBuilder = function(opts, element) {
     let label = `<label for="${selectAttrs.id}">${i18n[name]}</label>`;
 
     Object.keys(fieldData).filter(prop => {
-      return !utils.inArray(prop, ['value', 'options', 'label']);
+      return !utils.inArray(prop, ['options', 'label']);
     }).forEach(function(attr) {
       selectAttrs[attr] = fieldData[attr];
     });
