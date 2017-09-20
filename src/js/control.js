@@ -43,7 +43,6 @@ export default class control {
     }
     this.id = config.id;
     this.type = config.type;
-    this.subtype = config.subtype;
     if (this.description) {
       config.title = this.description;
     }
