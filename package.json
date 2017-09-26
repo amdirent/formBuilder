@@ -11,6 +11,7 @@
     "url": "http://github.com/kevinchappell/formBuilder",
     "type": "git"
   },
+  "private": true,
   "author": "Kevin Chappell <kevin.b.chappell@gmail.com>",
   "contributors": [],
   "bugs": "https://github.com/kevinchappell/formBuilder/issues",
